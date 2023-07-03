@@ -3,7 +3,7 @@ import openai
 
 openai.api_key=st.secrets["api_key"]
 
-st.title('test')
+st.title('AI_Flow')
 
 with st.form("form"):
     user_input=st.text_input("Prompt")
@@ -20,7 +20,7 @@ if submit and user_input:
         "content":user_input
     })
 
-    with st.spinner("Waiting for ChatGPT..."):
+    with st.spinner("Waiting..."):
         gpt_response=openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=gpt_prompt
@@ -34,10 +34,8 @@ if submit and user_input:
     #     ]
     # )
 
-    prompt=gpt_response["choices"][0]["message"]["content"]
-    st.write(prompt)
-
-    with st.spinner("Waiting for Dall-E..."):
+        prompt=gpt_response["choices"][0]["message"]["content"]
+    #st.write(prompt)
         dalle_response=openai.Image.create(
             prompt=prompt, 
             size="256x256"
